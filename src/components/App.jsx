@@ -21,9 +21,16 @@ const App = () => {
 
   const handleSearch = (e) => {
     const searchField = e.target.value;
+    function containsIgnoreCase(mainString, searchString) {
+      const regex = new RegExp(searchString, "i");
+      return regex.test(mainString);
+    }
+
     setRobots(
       initialRobots.current.filter(
-        (robot) => robot.name.first.includes(searchField) || robot.name.last.includes(searchField) || robot.login.username.includes(searchField)
+        (robot) => containsIgnoreCase(robot.name.first, searchField) || 
+                  containsIgnoreCase(robot.name.last, searchField) || 
+                  containsIgnoreCase(robot.login.username, searchField)
       )
     );
   };
