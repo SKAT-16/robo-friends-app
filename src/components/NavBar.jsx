@@ -6,7 +6,7 @@ const NavBar = () => {
   return (
     <div className="bg-gradient-to-br from-left-gradient to-right-gradient shadow-lg flex flex-col items-center justify-center fixed w-full top-0 left-0 pb-6">
       <h1 className="shadow-xl cursor-default font-logo font-medium text-4xl md:text-6xl text-center p-5 mt-3 mb-4 header-anim">
-        ROBOBLOG
+        ROBOTBLOG
       </h1>
       <SearchBar />
     </div>
