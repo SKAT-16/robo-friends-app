@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
 import axios from "axios";
+import { paragraph } from "txtgen";
 
 const initialState = {
   filteredRobots: [],
@@ -45,12 +45,9 @@ const robotsSlice = createSlice({
 
 export const getRobots = createAsyncThunk('robots/getRobots', async () => {
   var size = Math.floor(Math.random() * 100) + 3;
-  var paragraphSize = Math.floor(Math.random() * 10) + 8;
   var robotApi = await axios.get(`https://random-data-api.com/api/v2/users?size=${size}&response_type=json`);
-  var textApi = await axios.get(`http://metaphorpsum.com/paragraphs/${paragraphSize}/${paragraphSize}`);
-  var textData = textApi.data.split('\n').filter((s) => s !== "");
 
-  return robotApi.data.map((user) => ({ id: user.uid, avatar: user.avatar, email: user.email, fullName: "" + user.first_name + " " + user.last_name, userName: user.username, essay: textData[Math.floor(Math.random() * paragraphSize)] }));
+  return robotApi.data.map((user) => ({ id: user.uid, avatar: user.avatar, email: user.email, fullName: "" + user.first_name + " " + user.last_name, userName: user.username, essay: paragraph(Math.random() * 10 + 5) }));
 });
 
 export const { filterRobots, findRobot } = robotsSlice.actions;
